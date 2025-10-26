@@ -1,8 +1,8 @@
 import express from 'express';
-import helmet from 'helmet';
+// import helmet from 'helmet';
 import morgan from 'morgan';
 import cors from 'cors';
-import rateLimit from 'express-rate-limit';
+// import rateLimit from 'express-rate-limit';
 import sequelize from './config/sequelize.js';
 import appConfig from './config/env.js';
 import countryRoutes from './routes/countryRoutes.js';
@@ -13,18 +13,18 @@ import * as controller from './controllers/countryController.js';
 const app = express();
 const port = appConfig.PORT || 3000;
 
-app.use(helmet());
+// app.use(helmet());
 app.use(morgan('tiny'));
 app.use(cors({
     origin: '*',
     methods: ['GET', 'POST', 'PUT', 'DELETE']
 }));
 
-app.use(rateLimit({ 
-    windowMs: 15 * 60 * 1000, 
-    max: 100, 
-    message: "Too many requests fron this IP, please try again later!"
-}));
+// app.use(rateLimit({ 
+//     windowMs: 15 * 60 * 1000, 
+//     max: 100, 
+//     message: "Too many requests fron this IP, please try again later!"
+// }));
 
 app.use(express.json());
 

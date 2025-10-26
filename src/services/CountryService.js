@@ -5,6 +5,7 @@ import { fetchCountries, fetchExchangeRates } from './externalApiService.js';
 import { createSummaryImage } from './imageService.js';
 
 export async function refreshCountries() {
+  try {
   const [countries, rates] = await Promise.all([
     fetchCountries(),
     fetchExchangeRates()
@@ -61,6 +62,11 @@ export async function refreshCountries() {
     const total = await Country.count({ transaction: t });
     await createSummaryImage({ totalCountries: total, topCountries: top5, lastRefreshedAt: now });
   });
+} catch (error) {
+  console.error("❌ Error in refreshCountries:", error);
+  throw new Error("Refresh failed");
+};
+
 }
 
 export async function getCountries(filters) {
