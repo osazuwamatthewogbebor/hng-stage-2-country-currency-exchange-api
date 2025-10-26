@@ -28,6 +28,8 @@ app.use(cors({
 
 app.use(express.json());
 
+app.get('/kaithheathcheck', (req, res) => res.send('OK')); // 👈 Leapcell uses this to test
+
 app.get('/', (req, res) => {
     res.status(200).json({ 
         message: "Welcome",
@@ -52,9 +54,14 @@ app.use((err, req, res, next) => {
 try {
     await sequelize.sync();
     console.log("All models were synchronized successfully.");
-    app.listen(port, '0.0.0.0', () => {
-        console.log(`Server running on port ${port}`);
-    });
 } catch (error) {
     console.log("Unable to synchronize database", error);
 };
+
+const server = app.listen(port, '0.0.0.0', () => {
+    console.log(`Server running on port ${port}`);
+});
+
+server.on('error', (err) => {
+    console.error('Server failed to start:', err.message);
+});
