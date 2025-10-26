@@ -11,7 +11,6 @@ const sequelize = new Sequelize(`${appConfig.DB_NAME}`, `${appConfig.DB_USER}`, 
       require: true,
       rejectUnauthorized: false
     },
-    connectTimeout: 20000,
   },
 });
 
