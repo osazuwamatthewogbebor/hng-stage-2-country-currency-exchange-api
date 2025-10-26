@@ -6,6 +6,12 @@ const sequelize = new Sequelize(`${appConfig.DB_NAME}`, `${appConfig.DB_USER}`, 
   host: `${appConfig.DB_HOST}`,
   dialect: 'mysql',
   port: `${appConfig.DB_PORT}` || 3306,
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false
+    },
+  },
 });
 
 try{
