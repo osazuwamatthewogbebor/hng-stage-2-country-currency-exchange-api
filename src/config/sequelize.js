@@ -36,9 +36,9 @@ import { fileURLToPath } from 'url';
 import fs from 'fs';
 
 const dbPath = path.join(process.cwd(), 'database.sqlite');
-if (!fs.existsSync(dbPath)) {
-  fs.writeFileSync(dbPath, '');
-}
+// if (!fs.existsSync(dbPath)) {
+//   fs.writeFileSync(dbPath, '');
+// }
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -46,7 +46,7 @@ const __dirname = path.dirname(__filename);
 // Create a SQLite database file in your project directory
 const sequelize = new Sequelize({
   dialect: 'sqlite',
-  storage: dbPath,
+  storage: ':memory',
   logging: false, // turn off SQL logs for clarity
 });
 
