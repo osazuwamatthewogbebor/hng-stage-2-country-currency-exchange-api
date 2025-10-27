@@ -10,7 +10,8 @@ const appConfig = {
     DB_PASS: process.env.DB_PASS,
     COUNTRIES_API: process.env.COUNTRIES_API || "https://restcountries.com/v2/all?fields=name,capital,region,population,flag,currencies",
     RATES_API: process.env.RATES_API || "https://open.er-api.com/v6/latest/USD",
-    TIMEOUT: Number(process.env.TIMEOUT) || 15000
+    TIMEOUT: Number(process.env.TIMEOUT) || 15000,
+    AIVEN_CA_BASE64: process.env.AIVEN_CA_BASE64
 };
 
 let missing = false;
