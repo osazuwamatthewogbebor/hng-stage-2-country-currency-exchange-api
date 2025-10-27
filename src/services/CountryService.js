@@ -43,13 +43,15 @@ export async function refreshCountries() {
         last_refreshed_at: now
       };
 
-      const existing = await Country.findOne({
-        where: sequelize.where(fn('LOWER', col('name')), name.toLowerCase()),
-        transaction: t
-      });
+      await Country.upsert(data, { transaction: t });
 
-      if (existing) await existing.update(data, { transaction: t });
-      else await Country.create(data, { transaction: t });
+    //   const existing = await Country.findOne({
+    //     where: sequelize.where(fn('LOWER', col('name')), name.toLowerCase()),
+    //     transaction: t
+    //   });
+
+    //   if (existing) await existing.update(data, { transaction: t });
+    //   else await Country.create(data, { transaction: t });
     }
 
     const top5 = await Country.findAll({
@@ -60,10 +62,16 @@ export async function refreshCountries() {
     });
 
     const total = await Country.count({ transaction: t });
-    await createSummaryImage({ totalCountries: total, topCountries: top5, lastRefreshedAt: now });
+
+    try {
+      await createSummaryImage({ totalCountries: total, topCountries: top5, lastRefreshedAt: now });
+    } catch(err) {
+      console.error("Summary image creation failed:", err);
+    };
+
   });
 } catch (error) {
-  console.error("❌ Error in refreshCountries:", error);
+  console.error("Error in refreshCountries:", error);
   throw new Error("Refresh failed");
 };
 
