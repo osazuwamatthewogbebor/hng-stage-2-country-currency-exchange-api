@@ -27,12 +27,5 @@ if (!missing) {
     console.log(`All required credentials are present in environment vairiables`);
 };
 
-console.log("Database Config:", {
-  host: process.env.DB_HOST,
-  user: process.env.DB_USER,
-  name: process.env.DB_NAME,
-  port: process.env.DB_PORT
-});
-
 
 export default appConfig;

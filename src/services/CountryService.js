@@ -44,15 +44,7 @@ export async function refreshCountries() {
       };
 
       await Country.upsert(data, { transaction: t });
-
-    //   const existing = await Country.findOne({
-    //     where: sequelize.where(fn('LOWER', col('name')), name.toLowerCase()),
-    //     transaction: t
-    //   });
-
-    //   if (existing) await existing.update(data, { transaction: t });
-    //   else await Country.create(data, { transaction: t });
-    }
+    };
 
     const top5 = await Country.findAll({
       where: { estimated_gdp: { [Op.ne]: null } },
@@ -63,11 +55,11 @@ export async function refreshCountries() {
 
     const total = await Country.count({ transaction: t });
 
-    // try {
-    //   await createSummaryImage({ totalCountries: total, topCountries: top5, lastRefreshedAt: now });
-    // } catch(err) {
-    //   console.error("Summary image creation failed:", err);
-    // };
+    try {
+      await createSummaryImage({ totalCountries: total, topCountries: top5, lastRefreshedAt: now });
+    } catch(err) {
+      console.error("Summary image creation failed:", err);
+    };
 
   });
 } catch (error) {

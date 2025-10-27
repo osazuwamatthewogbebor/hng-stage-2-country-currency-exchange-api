@@ -1,7 +1,5 @@
 import express from 'express';
 import * as controller from '../controllers/countryController.js';
-import fs from 'fs';
-import path from 'path';
 
 const router = express.Router();
 
