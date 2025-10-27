@@ -58,7 +58,7 @@ try {
     console.log("Unable to synchronize database", error);
 };
 
-const server = app.listen(port, '0.0.0.0', () => {
+const server = app.listen(port || 3000, '0.0.0.0', () => {
     console.log(`Server running on port ${port}`);
 });
 
