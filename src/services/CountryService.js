@@ -63,11 +63,11 @@ export async function refreshCountries() {
 
     const total = await Country.count({ transaction: t });
 
-    try {
-      await createSummaryImage({ totalCountries: total, topCountries: top5, lastRefreshedAt: now });
-    } catch(err) {
-      console.error("Summary image creation failed:", err);
-    };
+    // try {
+    //   await createSummaryImage({ totalCountries: total, topCountries: top5, lastRefreshedAt: now });
+    // } catch(err) {
+    //   console.error("Summary image creation failed:", err);
+    // };
 
   });
 } catch (error) {
